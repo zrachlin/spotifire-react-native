@@ -7,7 +7,14 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  AppState,
+} from 'react-native';
 import ActivityRecognition from 'react-native-activity-recognition';
 
 const instructions = Platform.select({
@@ -64,14 +71,32 @@ export default class App extends Component {
   //   }
   // }
   render() {
+    const mpa = this.state.mostProbableActivity;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
-        {this.state.mostProbableActivity ? (
-          <Text>{this.state.mostProbableActivity.type}</Text>
-        ) : null}
+        {mpa ? <Text>{mpa.type}</Text> : null}
+        {mpa && mpa.type === 'WALKING'
+          ? Alert.alert(
+              "You're Walking!",
+              `Confidence: ${mpa.confidence}%`,
+              [
+                {
+                  text: 'Ask me later',
+                  onPress: () => console.log('Ask me later pressed'),
+                },
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+              ],
+              { cancelable: false }
+            )
+          : null}
       </View>
     );
   }
