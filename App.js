@@ -5,7 +5,7 @@
  * @format
  * @flow
  */
-
+import Reactotron from 'reactotron-react-native';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -72,6 +72,19 @@ export default class App extends Component {
   }
 
   render() {
+    // Reactotron.log('hello rendering world');
+    // Reactotron.display({
+    //   name: 'KNOCK KNOCK',
+    //   preview: "Who's there?",
+    //   value: 'Orange.',
+    // });
+
+    // Reactotron.display({
+    //   name: 'ORANGE',
+    //   preview: 'Who?',
+    //   value: "Orange you glad you don't know me in real life?",
+    //   important: true,
+    // });
     const mpa = this.state.mostProbableActivity;
     return (
       <View style={styles.container}>
