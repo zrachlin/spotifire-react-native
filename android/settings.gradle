@@ -1,0 +1,5 @@
+rootProject.name = 'spotifire'
+include ':react-native-activity-recognition'
+project(':react-native-activity-recognition').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-activity-recognition/android')
+
+include ':app'
