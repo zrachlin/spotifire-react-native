@@ -37,7 +37,7 @@ export default class App extends Component {
       error: null,
     };
     // console.dir(ActivityRecognition);
-    // this.handleAppStateChange = this.handleAppStateChange.bind(this);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
   componentDidMount() {
     // Subscribe to updates
@@ -56,20 +56,21 @@ export default class App extends Component {
     //   error => this.setState({ error: error.message }),
     //   { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     // );
-    // AppState.addEventListener('change', this.handleAppStateChange);
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
   componentWillUnmount() {
     // Stop activity detection and remove the listener
     ActivityRecognition.stop();
     this.unsubscribe();
-    // AppState.removeEventListener('change', this.handleAppStateChange);
+    AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
-  // handleAppStateChange(appState) {
-  //   if (appState === 'background') {
-  //     console.log('app is in the background');
-  //   }
-  // }
+  handleAppStateChange(appState) {
+    if (appState === 'background') {
+      console.log('app is in the background');
+    }
+  }
+
   render() {
     const mpa = this.state.mostProbableActivity;
     return (
