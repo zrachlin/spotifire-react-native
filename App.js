@@ -45,17 +45,17 @@ export default class App extends Component {
       this.setState({ mostProbableActivity: detectedActivities.sorted[0] });
       console.log(detectedActivities);
     });
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      error => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+    // navigator.geolocation.getCurrentPosition(
+    //   position => {
+    //     this.setState({
+    //       latitude: position.coords.latitude,
+    //       longitude: position.coords.longitude,
+    //       error: null,
+    //     });
+    //   },
+    //   error => this.setState({ error: error.message }),
+    //   { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    // );
     AppState.addEventListener('change', this.handleAppStateChange);
   }
   componentWillUnmount() {
@@ -79,11 +79,6 @@ export default class App extends Component {
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         {mpa ? <Text>{mpa.type}</Text> : null}
-        {this.state.latitude ? (
-          <Text>
-            Lat: {this.state.latitude}, Long: {this.state.longitude}
-          </Text>
-        ) : null}
         {mpa && mpa.type === 'WALKING'
           ? Alert.alert(
               "You're Walking!",
